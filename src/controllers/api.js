@@ -3,25 +3,44 @@ export default {
     get: async (req, res, next) => { 
         try{
             res.json({
-                "AccessPoint_1_KeyPassphrase": "sanlorenzo01",
-                "AccessPoint_1_SecurityEncryptionMode": "AES+TKIP",
-                "AccessPoint_1_SecurityModeEnabled": "WPA-WPA2-Personal",
-                "AccessPoint_1_Status": "Enabled",
-                "AccessPoint_2_KeyPassphrase": "sanlorenzo01",
-                "AccessPoint_2_SecurityEncryptionMode": "AES+TKIP",
-                "AccessPoint_2_SecurityModeEnabled": "WPA-WPA2-Personal",
-                "AccessPoint_2_Status": "Enabled",
-                "BandSteeringEnable": "true",
-                "Radio_1_OperatingChannelBandwidth": "20MHz",
-                "Radio_1_OperatingFrequencyBand": "2.4GHz",
-                "Radio_1_Status": "Up",
-                "Radio_2_OperatingChannelBandwidth": "80MHz",
-                "Radio_2_OperatingFrequencyBand": "5GHz",
-                "Radio_2_Status": "Up",
-                "Ssid_1_SSID": "Benja 2.4GHz",
-                "Ssid_1_Status": "Up",
-                "Ssid_2_SSID": "Benja 5.8GHz"
-              })
+                "items": {
+                    "bandsteering": "DISABLED",
+                    "wifi": [
+                        {
+                            "radioId": "10000",
+                            "bw": "20MHz",
+                            "band": "2.4",
+                            "enable": true,
+                            "ssid": [
+                                {
+                                    "ssidId": "10001",
+                                    "ssid": "Fibertel WiFi227-2.4GHz",
+                                    "enable": true,
+                                    "securityMode": "wpa2-personal",
+                                    "encryptionMode": "AES",
+                                    "keyPassphrase": "00427199775"
+                                }
+                            ]
+                        },
+                        {
+                            "radioId": "10100",
+                            "bw": "80MHz",
+                            "band": "5",
+                            "enable": true,
+                            "ssid": [
+                                {
+                                    "ssidId": "10101",
+                                    "ssid": "Fibertel WiFi227-5GHz",
+                                    "enable": true,
+                                    "securityMode": "wpa2-personal",
+                                    "encryptionMode": "AES",
+                                    "keyPassphrase": "00427199775"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            })
         }
         catch (error){
             next(error)
