@@ -1,4 +1,4 @@
-const { BigQuery } = require('@google-cloud/bigquery');
+import { BigQuery } from '@google-cloud/bigquery';
 
 const bigquery = new BigQuery({
   projectId: 'teco-dev-cdh-e926'
@@ -20,4 +20,4 @@ async function get(serie) {
   return rows; // ya es JSON
 }
 
-module.exports = { get };
+export default { get };
