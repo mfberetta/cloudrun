@@ -1,49 +1,23 @@
+const { BigQuery } = require('@google-cloud/bigquery');
 
-export default {
-    get: async (req, res, next) => { 
-        try{
-            res.json({
-                "items": {
-                    "bandsteering": "DISABLED",
-                    "wifi": [
-                        {
-                            "radioId": "10000",
-                            "bw": "20MHz",
-                            "band": "2.4",
-                            "enable": true,
-                            "ssid": [
-                                {
-                                    "ssidId": "10001",
-                                    "ssid": "Fibertel WiFi227-2.4GHz",
-                                    "enable": true,
-                                    "securityMode": "wpa2-personal",
-                                    "encryptionMode": "AES",
-                                    "keyPassphrase": "00427199775"
-                                }
-                            ]
-                        },
-                        {
-                            "radioId": "10100",
-                            "bw": "80MHz",
-                            "band": "5",
-                            "enable": true,
-                            "ssid": [
-                                {
-                                    "ssidId": "10101",
-                                    "ssid": "Fibertel WiFi227-5GHz",
-                                    "enable": true,
-                                    "securityMode": "wpa2-personal",
-                                    "encryptionMode": "AES",
-                                    "keyPassphrase": "00427199775"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            })
-        }
-        catch (error){
-            next(error)
-        }
-    }
+const bigquery = new BigQuery({
+  projectId: 'teco-dev-cdh-e926'
+});
+
+async function get(serie) {
+  const query = \`SELECT id, usuario, campania 
+  FROM `teco-dev-cdh-e926.hdm.callback\` 
+  where serie = '@serie'
+  `;
+
+  const options = {
+    query,
+    location: 'us-east4', // o 'EU' según tu dataset
+  };
+
+  const [rows] = await bigquery.query(options);
+
+  return rows; // ya es JSON
 }
+
+module.exports = { get };
