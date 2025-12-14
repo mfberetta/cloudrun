@@ -5,8 +5,8 @@ const bigquery = new BigQuery({
 });
 
 async function get(serie) {
-  const query = \`SELECT id, usuario, campania 
-  FROM `teco-dev-cdh-e926.hdm.callback\` 
+  const query = `SELECT id, usuario, campania 
+  FROM \`teco-dev-cdh-e926.hdm.callback\` 
   where serie = '@serie'
   `;
 
