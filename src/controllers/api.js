@@ -4,20 +4,20 @@ const bigquery = new BigQuery({
   projectId: 'teco-dev-cdh-e926'
 });
 
-async function get(serie) {
-  const query = `SELECT id, usuario, campania 
-  FROM \`teco-dev-cdh-e926.hdm.callback\` 
-  where serie = '@serie'
-  `;
-
-  const options = {
-    query,
-    location: 'us-east4', // o 'EU' según tu dataset
-  };
-
-  const [rows] = await bigquery.query(options);
-
-  return rows; // ya es JSON
+export default{
+	get: async (req, res, next) => { 
+		const { serial } = req.params;
+		
+		const query = `SELECT id, usuario, campania FROM \`teco-dev-cdh-e926.hdm.callback\` where serie = @serial`;
+		const options = {
+			query,
+			location: 'us-east4',
+			params: {
+				serial: serial 
+			}
+		}
+		const [rows] = await bigquery.query(options);
+		console.log(rows);
+		res.json(rows);
+	}
 }
-
-export default { get };

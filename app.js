@@ -1,3 +1,8 @@
+/*
+load SA -> $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\u166130\Downloads\sa-teco-dev-cdh-e926.json"
+llamada API -> http://localhost:8080/api/performance/DM1825718000935
+*/ 
+
 //Configuracion general del servidor
 import express from 'express'
 import bodyParser from 'body-parser'
@@ -14,7 +19,7 @@ app.use(cors())
 /*-----------------------------------------------------------*/
 //Router for API bulkdata
 import routerApp from './src/routes/api.js'
-app.use('/api/haas', routerApp)
+app.use('/api/performance', routerApp)
 /*-----------------------------------------------------------*/
 //Manejador de error a nivel aplicacion
 app.use((err, req, res, next) => {
